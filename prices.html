@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адвокат Кузбасса</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Логотип" class="logo">
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeMenu">✕</button>
+            <ul class="menu-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="services.html">Виды деятельности</a></li>
+                <li><a href="prices.html">Стоимость</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="contacts-section">
+            <h2 class="section-title">Стоимость услуг</h2>
+            <div class="pdf-container">
+                <div id="pdf-viewer" style="width: 100%; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                    <p id="pdf-loading" style="color: #111; padding: 20px;">Загрузка документа...</p>
+                </div>
+                
+                <!-- Подключаем PDF.js -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+                <script>
+                    // Указываем путь к worker-файлу (нужен для рендера в фоне)
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+                    
+                    const url = 'rates.pdf';
+                    const pdfViewer = document.getElementById('pdf-viewer');
+                    const loadingText = document.getElementById('pdf-loading');
+
+                    pdfjsLib.getDocument(url).promise.then(async (pdf) => {
+                        loadingText.style.display = 'none'; // прячем текст загрузки
+                        
+                        // Проходим по всем страницам
+                        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                            const page = await pdf.getPage(pageNum);
+                            // Рендерим в 2x масштабе для четкости на экранах телефонов (Retina)
+                            const viewport = page.getViewport({ scale: 2.0 });
+                            
+                            const canvas = document.createElement('canvas');
+                            canvas.style.width = '100%';
+                            canvas.style.maxWidth = '100%';
+                            canvas.style.height = 'auto'; // авто-высота чтобы не сплющило
+                            canvas.style.borderRadius = '4px';
+                            canvas.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                            canvas.style.display = 'block';
+                            
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+                            
+                            const renderContext = {
+                                canvasContext: canvas.getContext('2d'),
+                                viewport: viewport
+                            };
+                            
+                            await page.render(renderContext).promise;
+                            pdfViewer.appendChild(canvas);
+                        }
+                    }).catch(err => {
+                        console.error('Ошибка загрузки PDF:', err);
+                        pdfViewer.innerHTML = '<p style="color:#111;">Не удалось загрузить документ. <a href="rates.pdf" style="color: #0b3b36; font-weight: bold; text-decoration: underline;">Скачать файл</a></p>';
+                    });
+                </script>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

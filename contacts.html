@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адвокат Кузбасса</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Логотип" class="logo">
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="sidebar" id="sidebar">
+            <button class="close-btn" id="closeMenu">✕</button>
+            <ul class="menu-list">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="services.html">Виды деятельности</a></li>
+                <li><a href="prices.html">Стоимость</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="contacts-section">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-info">
+                <h3>Контактная информация</h3>
+                <p><span>Телефон:</span> <a href="tel:+79049939786" class="contact-link">8-904-993-97-86</a></p>
+                <p><span>Адрес:</span> 650000, г. Кемерово, пр. Кузнецкий, д. 17 оф. 404</p>
+                <p><span>E-mail:</span> <a href="mailto:ageeva2018marina@mail.ru" class="contact-link">ageeva2018marina@mail.ru</a></p>
+            </div>
+
+            <div class="contact-form-container">
+                <h2 class="form-title">Связаться с нами</h2>
+                <form class="contact-form" action="https://formsubmit.co/ageeva2018marina@mail.ru" method="POST">
+                    <!-- Скрытые настройки для FormSubmit -->
+                    <input type="hidden" name="_subject" value="Новая заявка с сайта (Адвокат Кузбасса)">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <input type="text" name="Имя" placeholder="Ваше имя" required>
+                    <input type="tel" name="Телефон" placeholder="Ваш телефон" required>
+                    <textarea name="Сообщение" placeholder="Сообщение" rows="4" required></textarea>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        <span class="policy-text">Я согласен(на) с <a href="privacy.html">политикой</a> обработки персональных данных и даю <a href="privacy.html">согласие</a> на обработку моих персональных данных.</span>
+                    </label>
+                    
+                    <button type="submit" class="submit-btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
