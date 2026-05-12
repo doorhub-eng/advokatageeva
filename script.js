@@ -19,4 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.toggle('active');
         });
     });
+
+    // Инициализация EmailJS
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("H3uOakJn_nTVbJW3t");
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = contactForm.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Отправка...';
+            btn.disabled = true;
+
+            emailjs.sendForm('service_fatz985', 'template_j150eji', this)
+                .then(function() {
+                    alert('Сообщение успешно отправлено!');
+                    contactForm.reset();
+                }, function(error) {
+                    alert('Ошибка при отправке. Попробуйте позже.');
+                    console.error('EmailJS Error:', error);
+                })
+                .finally(function() {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                });
+        });
+    }
 });

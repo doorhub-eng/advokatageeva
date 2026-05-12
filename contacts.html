@@ -39,14 +39,10 @@
 
             <div class="contact-form-container">
                 <h2 class="form-title">Связаться с нами</h2>
-                <form class="contact-form" action="https://formsubmit.co/ageeva2018marina@mail.ru" method="POST">
-                    <!-- Скрытые настройки для FormSubmit -->
-                    <input type="hidden" name="_subject" value="Новая заявка с сайта (Адвокат Кузбасса)">
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <input type="text" name="Имя" placeholder="Ваше имя" required>
-                    <input type="tel" name="Телефон" placeholder="Ваш телефон" required>
-                    <textarea name="Сообщение" placeholder="Сообщение" rows="4" required></textarea>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                    <input type="tel" name="phone" placeholder="Ваш телефон" required>
+                    <textarea name="message" placeholder="Сообщение" rows="4" required></textarea>
                     
                     <label class="checkbox-label">
                         <input type="checkbox" required>
@@ -60,6 +56,7 @@
         </div>
     </main>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
