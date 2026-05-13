@@ -58,7 +58,7 @@ body {
 
 .main-content {
     flex: 1;
-    padding: 20px;
+    padding: 20px 0 0 0; /* Убрал боковые отступы, чтобы белый блок растягивался */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -211,11 +211,12 @@ h1 {
     background-color: #ffffff;
     color: #333333;
     width: 100%;
-    max-width: 800px;
-    padding: 40px 20px;
-    border-radius: 8px;
+    max-width: none; /* Растягиваем на всю ширину ПК */
+    padding: 40px 40px;
+    border-radius: 24px 24px 0 0; /* Скруглил только верхние углы */
     text-align: left;
     margin-top: 20px;
+    flex: 1; /* Растягивает блок до самого низа */
     opacity: 0; /* начальное состояние до анимации */
     animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
